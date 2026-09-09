@@ -7,7 +7,7 @@ def index(request):
     return render(request, "barbearia_seu_inacio/index.html")
 
 def base(request):
-    return render(request, "barbearia_seu_inacio/base.html")
+    return render(request, "templates/base.html")
 
 def servicos(request):
     return render(request, "barbearia_seu_inacio/servicos.html")

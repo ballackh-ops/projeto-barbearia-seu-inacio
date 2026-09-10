@@ -1,9 +1,12 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Projeto Integrador{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'barbearia_seu_inacio/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'barbearia_seu_inacio/css/bootstrap.min.css' %}"/>
   </head>
   <body>
     {% block content %}

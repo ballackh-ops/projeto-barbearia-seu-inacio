@@ -1,2 +1,80 @@
 {% extends "base.html" %}
+{% load static %}
 {% block title %}{{ block.super }} - Contato{% endblock %}
+{% block content %}
+    <nav id="nav_footer" class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a href="#" class="navbar-brand col text-white">
+                <img src="{% static 'barbearia_seu_inacio/imgs/Logo.png' %}" alt="logo" class="img-fluid" id="logo">
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#menuprincipal" aria-controls="menuprincipal"
+            aria-expanded="false" aria-label="toggle menu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div id="menuprincipal" class="collapse navbar-collapse">                
+                <ul class="navbar-nav ms-md-auto text-center">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link col text-white">Início</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#contato" class="nav-link col text-white">Contato</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href=".//loja.html" class="nav-link col text-white">Loja</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div id="hero" class="card bg-dark text-white border-0">
+        <img src=".//imgs/hero.jpeg" class="card-img rounded-0" alt="serviço"/>
+        <div class="card-img-overlay text-center">
+            <h1>Projeto - Barbearia Seu Inácio</h1>
+            <h6>
+                Seja bem-vindo!
+            </h6>
+        </div>
+    </div>
+    <div id="contato">
+        <div class="container p-5">
+            <h1 class="text-center">Contato com Barbearia</h1>
+            <h6 class="text-center">Entre em contato comigo! E mude seu visual.</h6>
+            <form class="row g-3" onsubmit="return validarFormulario()" novalidate>
+                <div class="col-12 col-md-6">
+                    <label for="nome" class="form-label">Nome</label>
+                    <input type="text" id="nome" name="nome" required class="form-control"/>
+                </div>
+                <div class="col-12 col-md-3">
+                    <label for="email" class="form-label">E-mail</label>
+                    <input type="email" id="email" name="email" required class="form-control"/>
+                </div>
+                <div class="col-12 col-md-3">
+                    <label for="tel" class="form-label">Telefone</label>
+                    <input type="tel" id="telefone" name="Telefone" required class="form-control"/>
+                </div>
+                <div class="col-12">
+                    <label for="msg" class="form-label">Mensagem</label>
+                    <textarea name="msg" id="msg" class="form-control" rows="5" ></textarea>
+                </div>
+                <div class="col-12 text-center">
+                    <input type="submit" value="Enviar" class="btn btn-lg btn-warning"/>
+                    <input type="reset" value="Cancelar" class="btn btn-lg btn-outline-danger"/>
+                </div>
+            </form>
+        </div>
+    </div>
+    <footer id="nav_footer">
+        <div class="container p-5">
+            <div class="row">
+                <div class="col text-white text-center">
+                    &copy; Todos os direitos reservados, 2026
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="./js/bootstrap.bundle.min.js"></script>
+{% endblock %}

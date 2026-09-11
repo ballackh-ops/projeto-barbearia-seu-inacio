@@ -1,3 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block title %}{{ block.super }} - Index{% endblock %}
+{% block content %}
+{% include "nav.html" %}
+{% include "footer.html" %}
+{% endblock %}

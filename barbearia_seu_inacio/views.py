@@ -29,3 +29,6 @@ def atendimentos(request):
 
 def loja(request):
     return render(request, "barbearia_seu_inacio/loja.html")
+
+def login(request):
+    return render(request, "barbearia_seu_inacio/login.html")

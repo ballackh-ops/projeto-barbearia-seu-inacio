@@ -23,3 +23,9 @@ def agenda(request):
 
 def sobre(request):
     return render(request, "barbearia_seu_inacio/sobre.html")
+
+def atendimentos(request):
+    return render(request, "barbearia_seu_inacio/atendimentos.html")
+
+def loja(request):
+    return render(request, "barbearia_seu_inacio/loja.html")

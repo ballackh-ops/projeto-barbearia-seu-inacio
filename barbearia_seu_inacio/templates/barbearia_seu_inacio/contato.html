@@ -5,7 +5,7 @@
     <nav id="nav_footer" class="navbar navbar-expand-lg">
         <div class="container-fluid">
             <a href="#" class="navbar-brand col text-white">
-                <img src="{% static 'static/img/Logo.png' %}" alt="logo" class="img-fluid" id="logo">
+                <img src="{% static 'Logo.png' %}" alt="logo" class="img-fluid" id="logo">
             </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -17,20 +17,35 @@
             <div id="menuprincipal" class="collapse navbar-collapse">                
                 <ul class="navbar-nav ms-md-auto text-center">
                     <li class="nav-item">
-                        <a href="#" class="nav-link col text-white">Início</a>
+                        <a href="{% url 'index' %}" class="nav-link col text-white">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#contato" class="nav-link col text-white">Contato</a>
+                        <a href="{% url 'servicos' %}" class="nav-link col text-white">Serviços</a>
                     </li>
                     <li class="nav-item">
-                        <a href=".//loja.html" class="nav-link col text-white">Loja</a>
+                        <a href="{% url 'atendimentos' %}" class="nav-link col text-white">Atendimentos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'galeria' %}" class="nav-link col text-white">Galeria</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'agenda' %}" class="nav-link col text-white">Agenda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'loja' %}" class="nav-link col text-white">Loja</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'contato' %}" class="nav-link col text-white">Contato</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'sobre' %}" class="nav-link col text-white">Sobre</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
-    <div id="hero" class="card bg-dark text-white border-0">
-        <img src=".//imgs/hero.jpeg" class="card-img rounded-0" alt="serviço"/>
+    {% comment %} <div id="hero" class="card bg-dark text-white border-0">
+        <img src="{% static 'static/img/hero' %}" class="card-img rounded-0" alt="serviço"/>
         <div class="card-img-overlay text-center">
             <h1>Projeto - Barbearia Seu Inácio</h1>
             <h6>
@@ -74,7 +89,7 @@
                 </div>
             </div>
         </div>
-    </footer>
+    </footer> {% endcomment %}
 
     <script src="./js/bootstrap.bundle.min.js"></script>
 {% endblock %}

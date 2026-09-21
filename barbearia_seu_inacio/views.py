@@ -1,8 +1,5 @@
 from django.shortcuts import render
 
-from django.shortcuts import render
-
-
 def index(request):
     return render(request, "barbearia_seu_inacio/index.html")
 
@@ -29,6 +26,3 @@ def atendimentos(request):
 
 def loja(request):
     return render(request, "barbearia_seu_inacio/loja.html")
-
-def login(request):
-    return render(request, "barbearia_seu_inacio/login.html")

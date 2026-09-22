@@ -2,5 +2,12 @@
 {% block title %}{{ block.super }} - Galeria{% endblock %}
 {% block content %}
 {% include "nav.html" %}
+      <section class="py-5 text-center container">
+        <h4>Postado em: {{ postagem.data }}</h4>
+        {% if postagem.imagem %}
+        <img src="{{ post.imagem.url }}" alt="" style="width: 500px;">
+        {% endif %}
+        <p>{{ postagem.descricao | safe }}</p>
+      </section>
 {% include "footer.html" %}
 {% endblock %}

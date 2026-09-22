@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'barbearia_seu_inacio',
+    'users',
+    'tinymce',
 ]
 
 MIDDLEWARE = [
@@ -123,3 +125,5 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = "media/"
 MEDIA_ROOT = BASE_DIR / "media/"
+
+AUTH_USER_MODEL = "users.User"

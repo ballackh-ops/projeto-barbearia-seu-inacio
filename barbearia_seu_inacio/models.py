@@ -1,20 +1,9 @@
 from django.db import models
-# from tinymce.models import HTMLField
+from tinymce.models import HTMLField
+from .models import User
 
-class servico(models.Model):
-    nome = models.CharField(max_length=50)
-    imagem = models.ImageField(upload_to="servicos")
-    # descricao = HTMLField()
-    preco = models.FloatField()
-
-    def __str__(self):
-        return self.nome
-
-class Produtos(models.Model):
-    nome = models.CharField(max_length=50)
-    imagem = models.ImageField(upload_to="produtos")
-    # descricao = HTMLField()
-    preco = models.FloatField()
-
-    def __str__(self):
-            return self.nome
+class Postagem(models.Model):
+    imagem = models.ImageField(uploud_to="galeria")
+    descricao = HTMLField()
+    data = models.DateField(auto_now=True)
+    autor = models.ForeignKey(User, on_delete=models.CASCADE)

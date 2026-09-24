@@ -17,9 +17,18 @@ def contato(request):
 
 @login_required
 @permission_required("barbearia_seu_inacio.view_postagem")
-def galeria(request, id_postagem):
+def galeria(request):
+    postagens = Postagem.objects.all()
     return render(request, "barbearia_seu_inacio/galeria.html", context = {
-        "post": get_object_or_404(Postagem, id=id_postagem),
+        "Postagens": postagens,
+    })
+
+@login_required
+@permission_required("barbearia_seu_inacio.view_postagem")
+def postagem(request, id_postagem):
+    postagem = get_object_or_404(Postagem, id=id_postagem)
+    return render(request, "barbearia_seu_inacio/postagem.html", context = {
+        "postagem": postagem,
     })
 
 @login_required
@@ -59,7 +68,7 @@ def editar_postagem(request, id_post):
 @permission_required("barbearia_seu_inacio.delete_postagem")
 def remover_postagem(request, id_post):
     if request.method == "POST":
-        post = get_object_or_404(Post, id=id_post)
+        post = get_object_or_404(Postagem, id=id_post)
         post.delete()
         return redirect("index")
     else:
@@ -76,3 +85,6 @@ def atendimentos(request):
 
 def loja(request):
     return render(request, "barbearia_seu_inacio/loja.html")
+
+def login(request):
+    return render(request, "barbearia_seu_inacio/login.html")

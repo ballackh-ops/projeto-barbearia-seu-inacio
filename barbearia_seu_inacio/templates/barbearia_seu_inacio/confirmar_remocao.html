@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% load static %}
+{% block "title" %}Confirmar Remoção{% endblock "title" %}
+{% block "content" %}
+<h1>Tem certeza de que deseja remover esta postagem?</h1>
+    <a href="{% url 'index' %}"><button>Cancelar</button></a>
+<form method="POST">
+    {% csrf_token %}
+    <input type="submit" value="Confirmar">
+</form>
+{% endblock "content" %}

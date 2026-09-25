@@ -42,15 +42,15 @@ def nova_postagem(request):
     else:
         form = PostagemForm()
 
-    return render(request, "blog/form_post.html", context = {
+    return render(request, "barbearia_seu_inacio/form_postagem.html", context = {
         "form": form,
     })
 
 
 @login_required
 @permission_required("barbearia_seu_inacio.change_postagem")
-def editar_postagem(request, id_post):
-    post = get_object_or_404(Postagem, id=id_post)
+def editar_postagem(request, id_postagem):
+    post = get_object_or_404(Postagem, id=id_postagem)
     if request.method == "POST":
         form = PostagemForm(request.POST, request.FILES, instance=post)
         if form.is_valid():
@@ -59,20 +59,20 @@ def editar_postagem(request, id_post):
     else:
         form = PostagemForm(instance=post)
 
-    return render(request, "blog/form_post.html", context = {
+    return render(request, "barbearia_seu_inacio/form_postagem.html", context = {
         "form": form,
         "is_editar": True,
     })
 
 @login_required
 @permission_required("barbearia_seu_inacio.delete_postagem")
-def remover_postagem(request, id_post):
+def remover_postagem(request, id_postagem):
     if request.method == "POST":
-        post = get_object_or_404(Postagem, id=id_post)
+        post = get_object_or_404(Postagem, id=id_postagem)
         post.delete()
         return redirect("index")
     else:
-        return render(request, "blog/confirmar_remocao.html")
+        return render(request, "barbearia_seu_inacio/confirmar_remocao.html")
 
 def agenda(request):
     return render(request, "barbearia_seu_inacio/agenda.html")

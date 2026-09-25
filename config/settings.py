@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'barbearia_seu_inacio',
     'users',
     'tinymce',
+    'crispy_forms',
+    'crispy_bootstrap4',
 ]
 
 MIDDLEWARE = [
@@ -129,3 +131,6 @@ MEDIA_ROOT = BASE_DIR / "media/"
 AUTH_USER_MODEL = "users.User"
 
 LOGIN_URL = "login"
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
+CRISPY_TEMPLATE_PACK = "bootstrap4"

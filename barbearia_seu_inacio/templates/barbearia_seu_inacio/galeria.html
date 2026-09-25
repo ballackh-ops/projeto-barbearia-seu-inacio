@@ -3,11 +3,11 @@
 {% block content %}
 {% include "nav.html" %}
       <section class="py-5 text-center container">
-        <h4>Postado em: {{ postagem.data }}</h4>
-        {% if postagem.imagem %}
-        <img src="{{ postagem.imagem.url }}" alt="" style="width: 500px;">
-        {% endif %}
-        <p>{{ postagem.descricao | safe }}</p>
+        {% for postagem in Postagens %}
+          <a href="{% url 'postagem' postagem.id %}">
+            {% if postagem.imagem %}<img src="{{ postagem.imagem.url }}">{% endif %}
+          </a>
+        {% endfor %}
       </section>
 {% include "footer.html" %}
 {% endblock %}

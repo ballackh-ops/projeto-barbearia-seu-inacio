@@ -2,4 +2,20 @@
 {% load static %}
 {% block title %}{{ block.super }} - Login{% endblock %}
 {% block content %}
+{% include "nav.html" %}
+<section class="py-5 container">
+  {% if messages %}
+    {% for m in messages %}<p>{{ m }}</p>{% endfor %}
+  {% endif %}
+  <form method="POST">
+    {% csrf_token %}
+    <input type="hidden" name="next" value="{{ request.GET.next }}">
+    <label for="username">Usuário</label>
+    <input type="text" name="username" id="username" required>
+    <label for="password">Senha</label>
+    <input type="password" name="password" id="password" required>
+    <button type="submit">Entrar</button>
+  </form>
+</section>
+{% include "footer.html" %}
 {% endblock %}

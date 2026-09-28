@@ -1,17 +1,23 @@
 #main{
     position: relative;
-    height: auto;
-    max-height: 150vh;
+    height: 60vh;
+    min-height: 320px;
     overflow: hidden;
-    border-radius: 0px;
 }
 #hero{
-    height: 50vh;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 10%;
     filter: brightness(0.6);
 }
 
 #main .card-img-overlay{
-    padding-top: 15% ;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .bg-lightgray{

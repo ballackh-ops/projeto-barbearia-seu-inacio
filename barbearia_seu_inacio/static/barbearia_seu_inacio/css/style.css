@@ -1,15 +1,16 @@
-#hero{
+#main{
+    position: relative;
     height: auto;
     max-height: 150vh;
     overflow: hidden;
     border-radius: 0px;
 }
-#hero img{
-    object-fit: cover;
+#hero{
+    height: 50vh;
     filter: brightness(0.6);
 }
 
-#hero .card-img-overlay{
+#main .card-img-overlay{
     padding-top: 15% ;
 }
 

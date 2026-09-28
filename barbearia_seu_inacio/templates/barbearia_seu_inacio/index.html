@@ -3,5 +3,15 @@
 {% block title %}{{ block.super }} - Index{% endblock %}
 {% block content %}
 {% include "nav.html" %}
+    <div id="main">
+        <img id="hero" src="{% static 'barbearia_seu_inacio/img/hero.jpeg' %}" class="card-img rounded-0" alt="bsi"/>
+        <div class="card-img-overlay text-center text-light-emphasis">
+            <h1>Barbearia Seu Inácio</h1>
+            <h6>
+                Não é uma fase, é um estilo
+            </h6>
+            <a href="{% url 'atendimentos' %}" class="btn btn-warning btn-lg">Agendar Horário</a>
+        </div>
+    </div>
 {% include "footer.html" %}
 {% endblock %}

@@ -4,13 +4,46 @@
 {% block content %}
 {% include "nav.html" %}
     <div id="main">
-        <img id="hero" src="{% static 'barbearia_seu_inacio/img/hero.jpeg' %}" class="card-img rounded-0" alt="bsi"/>
+        <img id="hero" src="{% static 'barbearia_seu_inacio/img/hero.png' %}" class="card-img rounded-0" alt="bsi"/>
         <div class="card-img-overlay text-center text-light">
             <h1>Barbearia Seu Inácio</h1>
             <h4>
                 Não é uma fase, é um <spam class="text-warning">estilo</spam>
             </h4>
             <a href="{% url 'atendimentos' %}" class="btn btn-warning btn-lg">Agendar Horário</a>
+        </div>
+    </div>
+    <div id="atendimentos">
+        <div class="container p-5">
+            <div class="row">
+                <h1 class="col text-center">O que temos a oferecer</h1>
+            </div>
+            <div class="row g-3">
+                <div class="col-12 col-md-4">
+                    <div class="card h-100">
+                        <img src="{% static 'barbearia_seu_inacio/img/atendimento1.png' %}" class="card-img-top" >
+                        <div class="card-body text-center">
+                            <h5 class="card-text">Corte de Cabelo</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="card h-100">
+                        <img src="{% static 'barbearia_seu_inacio/img/atendimento2.png' %}" class="card-img-top"/>
+                        <div class="card-body text-center">
+                            <h5 class="card-text">Barba</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="card h-100">
+                        <img src="{% static 'barbearia_seu_inacio/img/atendimento3.png' %}" class="card-img-top"/>
+                        <div class="card-body text-center">
+                            <h5 class="card-text">Hidratação</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 {% include "footer.html" %}

@@ -88,3 +88,4 @@ def loja(request):
 
 def login(request):
     return render(request, "barbearia_seu_inacio/login.html")
+

@@ -1,13 +1,55 @@
 {% extends "base.html" %}
 {% block title %}{{ block.super }} - Galeria{% endblock %}
+
 {% block content %}
 {% include "nav.html" %}
-      <section class="py-5 text-center container">
-        {% for postagem in Postagens %}
-          <a href="{% url 'postagem' postagem.id %}">
-            {% if postagem.imagem %}<img src="{{ postagem.imagem.url }}">{% endif %}
-          </a>
-        {% endfor %}
-      </section>
+
+<section class="py-5 container">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Galeria</h2>
+    {% if perms.barbearia_seu_inacio.add_postagem %}
+      <a href="{% url 'nova_postagem' %}" class="btn btn-success">+ Nova Postagem</a>
+    {% endif %}
+  </div>
+
+  <div class="row">
+    {% for post in postagens %}
+      <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm">
+          {% if post.imagem %}
+            <img src="{{ post.imagem.url }}" class="card-img-top" alt="{{ post.titulo }}" style="height: 220px; object-fit: cover;">
+          {% endif %}
+
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">{{ post.titulo }}</h5>
+
+            <div class="mt-auto d-flex gap-2">
+              <a href="{% url 'postagem' post.id %}" class="btn btn-sm btn-info text-white">
+                Ver
+              </a>
+
+              {% if perms.barbearia_seu_inacio.change_postagem %}
+                <a href="{% url 'editar_postagem' post.id %}" class="btn btn-sm btn-warning">
+                  Editar
+                </a>
+              {% endif %}
+
+              {% if perms.barbearia_seu_inacio.delete_postagem %}
+                <a href="{% url 'remover_postagem' post.id %}" class="btn btn-sm btn-danger">
+                  Excluir
+                </a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <div class="col-12 text-center py-5">
+        <p class="text-muted fs-5">Nenhuma postagem cadastrada na galeria.</p>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
 {% include "footer.html" %}
 {% endblock %}

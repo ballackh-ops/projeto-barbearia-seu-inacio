@@ -23,18 +23,18 @@
           <div class="card-body d-flex flex-column">
 
             <div class="mt-auto d-flex gap-2">
-              <a href="{% url 'postagem' %}" class="btn btn-sm btn-info text-white">
+              <a href="{% url 'postagem' postagem.id %}" class="btn btn-sm btn-info text-white">
                 Ver
               </a>
 
               {% if perms.barbearia_seu_inacio.change_postagem %}
-                <a href="{% url 'editar_postagem' id_postagem %}" class="btn btn-sm btn-warning">
+                <a href="{% url 'editar_postagem' postagem.id %}" class="btn btn-sm btn-warning">
                   Editar
                 </a>
               {% endif %}
 
               {% if perms.barbearia_seu_inacio.delete_postagem %}
-                <a href="{% url 'remover_postagem' id_postagem %}" class="btn btn-sm btn-danger">
+                <a href="{% url 'remover_postagem' postagem.id %}" class="btn btn-sm btn-danger">
                   Excluir
                 </a>
               {% endif %}

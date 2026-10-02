@@ -20,7 +20,7 @@ def contato(request):
 def galeria(request):
     postagens = Postagem.objects.all()
     return render(request, "barbearia_seu_inacio/galeria.html", context = {
-        "Postagens": postagens,
+        "postagens": postagens,
     })
 
 @login_required
@@ -38,7 +38,7 @@ def nova_postagem(request):
         form = PostagemForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect("index")
+            return redirect("galeria")
     else:
         form = PostagemForm()
 
@@ -55,7 +55,7 @@ def editar_postagem(request, id_postagem):
         form = PostagemForm(request.POST, request.FILES, instance=post)
         if form.is_valid():
             form.save()
-            return redirect("index")
+            return redirect("galeria")
     else:
         form = PostagemForm(instance=post)
 
@@ -70,7 +70,7 @@ def remover_postagem(request, id_postagem):
     if request.method == "POST":
         post = get_object_or_404(Postagem, id=id_postagem)
         post.delete()
-        return redirect("index")
+        return redirect("galeria")
     else:
         return render(request, "barbearia_seu_inacio/confirmar_remocao.html")
 

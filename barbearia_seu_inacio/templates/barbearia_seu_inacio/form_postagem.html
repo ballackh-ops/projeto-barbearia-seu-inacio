@@ -2,6 +2,7 @@
 {% load crispy_forms_filters %}
 {% block "title" %}{% if is_editar %} Editar Postagem {% else %} Criar Postagem {% endif %}{% endblock %}
 {% block content %}
+{% include "nav.html" %}
 <section class="py-5 container">
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
@@ -10,4 +11,5 @@
     </form>
 </section>
 {{ form.media }}
+{% include "footer.html" %}
 {% endblock %}

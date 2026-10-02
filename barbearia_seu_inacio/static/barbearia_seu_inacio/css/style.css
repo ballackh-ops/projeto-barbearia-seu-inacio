@@ -85,3 +85,6 @@ body{
 .nav-item{
     font-size: larger;
 }
+.postagem-card{
+    max-width: 700px;
+}

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}{{ block.super }} - Postagem{% endblock %}
+{% block content %}
+{% include "nav.html" %}
+
+<section class="py-5 container">
+    <a href="{% url 'galeria' %}" class="btn btn-warning mb-4">&larr; Voltar à Galeria</a>
+
+    <div class="card shadow-sm mx-auto postagem-card">
+        {% if postagem.imagem %}
+        <img src="{{ postagem.imagem.url }}" class="card-img-top" alt="Foto da postagem">
+        {% endif %}
+        <div class="card-body">
+            <p class="text-muted mb-3">Postado em {{ postagem.data|date:"d/m/Y" }}</p>
+            <div class="text-justify">{{ postagem.descricao|safe }}</div>
+
+            {% if perms.barbearia_seu_inacio.change_postagem or perms.barbearia_seu_inacio.delete_postagem %}
+            <div class="d-flex gap-2 mt-4">
+                {% if perms.barbearia_seu_inacio.change_postagem %}
+                <a href="{% url 'editar_postagem' postagem.id %}" class="btn btn-warning">Editar</a>
+                {% endif %}
+                {% if perms.barbearia_seu_inacio.delete_postagem %}
+                <a href="{% url 'remover_postagem' postagem.id %}" class="btn btn-outline-danger">Remover</a>
+                {% endif %}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+{% include "footer.html" %}
+{% endblock %}

@@ -15,8 +15,6 @@ def servicos(request):
 def contato(request):
     return render(request, "barbearia_seu_inacio/contato.html")
 
-@login_required
-@permission_required("barbearia_seu_inacio.view_postagem")
 def galeria(request):
     postagens = Postagem.objects.all()
     return render(request, "barbearia_seu_inacio/galeria.html", context = {
@@ -85,7 +83,3 @@ def atendimentos(request):
 
 def loja(request):
     return render(request, "barbearia_seu_inacio/loja.html")
-
-def login(request):
-    return render(request, "barbearia_seu_inacio/login.html")
-

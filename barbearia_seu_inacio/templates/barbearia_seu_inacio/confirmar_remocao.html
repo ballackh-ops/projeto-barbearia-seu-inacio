@@ -1,13 +1,16 @@
 {% extends "base.html" %}
-{% load static %}
-{% block "title" %}Confirmar Remoção{% endblock "title" %}
+{% block title %}{{ block.super }} - Confirmar Remoção{% endblock %}
 {% block content %}
 {% include "nav.html" %}
-<h1>Tem certeza de que deseja remover esta postagem?</h1>
-    <a href="{% url 'index' %}"><button>Cancelar</button></a>
-<form method="POST">
-    {% csrf_token %}
-    <input type="submit" value="Confirmar">
-</form>
+<section class="py-5 container text-center">
+    <h2>Tem certeza de que deseja remover esta postagem?</h2>
+    <div class="d-flex justify-content-center gap-2">
+        <a href="{% url 'postagem' postagem.id %}" class="btn btn-outline-secondary">Cancelar</a>
+        <form method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Confirmar remoção</button>
+        </form>
+    </div>
+</section>
 {% include "footer.html" %}
-{% endblock content %}
+{% endblock %}

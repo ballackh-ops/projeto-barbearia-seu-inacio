@@ -66,15 +66,15 @@ def editar_postagem(request, id_postagem):
         messages.error(request, "Acesso negado: Você não tem permissão para editar postagens.")
         return redirect("galeria")
 
-    post = get_object_or_404(Postagem, id=id_postagem)
+    postagem = get_object_or_404(Postagem, id=id_postagem)
     if request.method == "POST":
-        form = PostagemForm(request.POST, request.FILES, instance=post)
+        form = PostagemForm(request.POST, request.FILES, instance=postagem)
         if form.is_valid():
             form.save()
             messages.success(request, "Postagem atualizada com sucesso!")
             return redirect("galeria")
     else:
-        form = PostagemForm(instance=post)
+        form = PostagemForm(instance=postagem)
 
     return render(request, "barbearia_seu_inacio/form_postagem.html", context={
         "form": form,
@@ -88,14 +88,14 @@ def remover_postagem(request, id_postagem):
         messages.error(request, "Acesso negado: Você não tem permissão para excluir postagens.")
         return redirect("galeria")
 
-    post = get_object_or_404(Postagem, id=id_postagem)
+    postagem = get_object_or_404(Postagem, id=id_postagem)
     if request.method == "POST":
-        post.delete()
+        postagem.delete()
         messages.success(request, "Postagem removida com sucesso!")
         return redirect("galeria")
 
     return render(request, "barbearia_seu_inacio/confirmar_remocao.html", context={
-        "post": post,
+        "postagem": postagem,
     })
 
 

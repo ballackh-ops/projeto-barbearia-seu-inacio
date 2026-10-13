@@ -8,11 +8,11 @@
 
 <section class="py-5 container">
   <div class="row justify-content-center">
-    <div class="col-md-8 col-lg-6">
+    <div class="col-md-8 col-lg-10">
       <div class="card shadow-sm border-0">
         
         <!-- Cabeçalho do Card -->
-        <div class="card-header bg-dark text-white py-3">
+        <div class="card-header text-white py-3" id="postagem_form_card">
           <h4 class="card-title mb-0 text-center">
             {% if is_editar %}
                Editar Postagem
@@ -39,7 +39,7 @@
               <a href="{% url 'galeria' %}" class="btn btn-outline-secondary px-4">
                 Cancelar
               </a>
-              <button type="submit" class="btn btn-primary px-4">
+              <button type="submit" class="btn btn-warning px-4">
                 {% if is_editar %}Salvar Alterações{% else %}Enviar{% endif %}
               </button>
             </div>

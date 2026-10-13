@@ -10,7 +10,7 @@ def login(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             auth_login(request, user)
-            return redirect(request.POST.get("next") or "index")
+            return redirect(request.POST.get("next") or "index.html")
         messages.error(request, "Usuário ou senha inválidos.")
     return render(request, "registration/login.html")
 
@@ -20,7 +20,7 @@ def cadastro(request):
         if form.is_valid():
             user = form.save()
             auth_login(request, user)
-            return redirect("index")
+            return redirect("index.html")
     else:
         form = CadastroForm()
     return render(request, "users/cadastro.html", {"form": form})

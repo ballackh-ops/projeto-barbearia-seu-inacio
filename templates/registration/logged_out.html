@@ -1,19 +1,10 @@
-{% extends "admin/base_site.html" %}
-{% load i18n %}
-
-{% block breadcrumbs %}
-<ol class="breadcrumbs">
-<li><a href="{% url 'admin:index' %}">{% translate 'Home' %}</a></li>
-<li aria-current="page">{% translate 'Logout' %}</li>
-</ol>
-{% endblock %}
-
-{% block nav-sidebar %}{% endblock %}
-
+{% extends "base.html" %}
+{% block title %}{{ block.super }} - Você saiu{% endblock %}
 {% block content %}
-
-<p>{% translate "Thanks for spending some quality time with the web site today." %}</p>
-
-<p><a href="{% url 'admin:index' %}">{% translate 'Log in again' %}</a></p>
-
+{% include "nav.html" %}
+<section class="py-5 container text-center">
+    <h2>Você saiu da sua conta.</h2>
+    <a href="{% url 'login' %}" class="btn btn-warning mt-3">Entrar novamente</a>
+</section>
+{% include "footer.html" %}
 {% endblock %}

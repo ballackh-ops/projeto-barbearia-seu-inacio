@@ -10,7 +10,7 @@ def login(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             auth_login(request, user)
-            return redirect(request.POST.get("next") or "index.html")
+            return redirect(request.POST.get("next") or "index")
         messages.error(request, "Usuário ou senha inválidos.")
     return render(request, "registration/login.html")
 

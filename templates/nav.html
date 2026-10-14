@@ -55,7 +55,14 @@
                        {% if current == 'sobre' %}aria-current="page"{% endif %}>Sobre</a>
                 </li>
                 <li class="nav-item">
-                    <a href="{% url 'login' %}" class="btn btn-lg btn-warning">Login</a>
+                    {% if user.is_authenticated %}
+                    <form method="POST" action="{% url 'logout' %}" class="d-inline">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-lg btn-danger">Sair</button>
+                    </form>
+                    {% else %}
+                    <a href="{% url 'cadastro' %}" class="btn btn-lg btn-warning">Cadastrar-se</a>
+                    {% endif %}
                 </li>
             </ul>
         </div>

@@ -4,18 +4,12 @@ from .models import User
 
 
 class CadastroForm(UserCreationForm):
-    nome = forms.CharField(label="Nome completo", max_length=150)
+    nome = forms.CharField(label="nome", max_length=150)
     email = forms.EmailField(required=True)
 
     class Meta(UserCreationForm.Meta):
         model = User
-        fields = ("email",)
-
-    def clean_email(self):
-        email = self.cleaned_data["email"]
-        if User.objects.filter(email__iexact=email).exists():
-            raise forms.ValidationError("Este e-mail já está cadastrado.")
-        return email
+        fields = ("nome", "email",)
 
     def save(self, commit=True):
         user = super().save(commit=False)
@@ -26,3 +20,9 @@ class CadastroForm(UserCreationForm):
         if commit:
             user.save()
         return user
+
+    def clean_email(self):
+        email = self.cleaned_data["email"]
+        if User.objects.filter(email__iexact=email).exists():
+            raise forms.ValidationError("Este e-mail já está cadastrado.")
+        return email

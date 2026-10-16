@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import Postagem
 from .forms import PostagemForm
+from django.core.paginator import Paginator
 
 
 def index(request):
@@ -23,8 +24,18 @@ def contato(request):
 
 def galeria(request):
     postagens = Postagem.objects.all()
+    paginator = Paginator(postagens, 3)  # Separa em páginas de 3 postagens
+    numero_da_pagina = request.GET.get('pagina')  # Pega o número da página da URL
+    print(numero_da_pagina)
+    numero_da_pagina = numero_da_pagina if numero_da_pagina else 1
+    postagens_paginadas = paginator.get_page(numero_da_pagina)
+    range_elided = paginator.get_elided_page_range(numero_da_pagina, on_each_side=1, on_ends=1)
+
+    
     return render(request, "barbearia_seu_inacio/galeria.html", context={
         "postagens": postagens,
+        "postagens": postagens_paginadas,
+        "range_elided": range_elided,
     })
 
 

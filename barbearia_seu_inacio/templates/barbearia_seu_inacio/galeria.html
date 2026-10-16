@@ -60,5 +60,29 @@
   </div>
 </section>
 
+{% comment %} paginação do blog {% endcomment %}
+
+<div aria-label="Page navigation example">
+  <ul class="pagination">
+    {% if postagens.has_previous %}
+    <li class="page-item">
+      <a class="page-link" href="?pagina={{ postagens.previous_page_number }}" aria-label="Anterior">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    {% endif %}
+    {% for page in range_elided %}
+    <li class="page-item"><a class="page-link" href="?pagina={{ page }}">{{ page }}</a></li>
+    {% endfor %}
+    {% if postagens.has_next %}
+    <li class="page-item">
+      <a class="page-link" href="?pagina={{ postagens.next_page_number }}" aria-label="Próxima">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+    {% endif %}
+  </ul>
+</div>
+
 {% include "footer.html" %}
 {% endblock %}

@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 {% block title %}{{ block.super }} - Login{% endblock %}
 {% block content %}
-{% include "nav.html" %}
 <section class="py-5 container">
     <h2>Entrar</h2>
     {% if erro %}
@@ -23,5 +22,4 @@
     <p class="mt-3">Não tem conta? <a href="{% url 'cadastro' %}">Cadastre-se</a></p>
     <p><a href="{% url 'redefinir_senha' %}">Esqueci minha senha</a></p>
 </section>
-{% include "footer.html" %}
 {% endblock %}

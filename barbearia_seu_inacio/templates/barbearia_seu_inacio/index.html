@@ -2,7 +2,6 @@
 {% load static %}
 {% block title %}{{ block.super }} - Home{% endblock %}
 {% block content %}
-{% include "nav.html" %}
     <div id="main">
         <img id="hero" src="{% static 'barbearia_seu_inacio/img/hero.png' %}" class="card-img rounded-0" alt="bsi"/>
         <div class="card-img-overlay text-center text-light">
@@ -46,5 +45,4 @@
             </div>
         </div>
     </div>
-{% include "footer.html" %}
 {% endblock %}

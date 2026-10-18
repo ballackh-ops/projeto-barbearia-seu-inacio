@@ -2,7 +2,6 @@
 {% load static %}
 {% block title %}{{ block.super }} - Postagem{% endblock %}
 {% block content %}
-{% include "nav.html" %}
 
 <section class="py-5 container">
     <a href="{% url 'galeria' %}" class="btn btn-warning mb-4">&larr; Voltar à Galeria</a>
@@ -37,5 +36,4 @@
     </div>
 </section>
 
-{% include "footer.html" %}
 {% endblock %}

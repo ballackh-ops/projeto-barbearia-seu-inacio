@@ -1,10 +1,8 @@
 {% extends "base.html" %}
 {% block title %}{{ block.super }} - Você saiu{% endblock %}
 {% block content %}
-{% include "nav.html" %}
 <section class="py-5 container text-center">
     <h2>Você saiu da sua conta.</h2>
     <a href="{% url 'login' %}" class="btn btn-warning mt-3">Entrar novamente</a>
 </section>
-{% include "footer.html" %}
 {% endblock %}

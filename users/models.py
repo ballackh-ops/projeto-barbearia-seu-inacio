@@ -3,8 +3,3 @@ from django.db import models
 
 class User(AbstractUser):
     email = models.EmailField(max_length=255, unique=True)
-   
-    # Define qual o campo é o nome de usuário
-    USERNAME_FIELD = "username"
-    # Necessário para createsuperuser continuar funcionando
-    REQUIRED_FIELDS = ["email"]

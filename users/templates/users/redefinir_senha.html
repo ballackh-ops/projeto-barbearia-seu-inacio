@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block title %}{{ block.super }} - Recuperar Senha{% endblock %}
+{% block content %}
+{% include "nav.html" %}
+<section class="py-5 container">
+    <h2>{% if etapa == "senha" %}Defina sua nova senha{% else %}Esqueceu sua senha?{% endif %}</h2>
+    {% if erro %}<div class="alert alert-danger">{{ erro }}</div>{% endif %}
+    {% if etapa == "senha" and form %}
+    <form method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="etapa" value="senha">
+        <input type="hidden" name="username" value="{{ usuario.username }}">
+        <input type="hidden" name="email" value="{{ usuario.email }}">
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-warning mt-3">Salvar nova senha</button>
+    </form>
+    {% else %}
+    <p>Informe seu nome de usuário e o e-mail cadastrado.</p>
+    <form method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="etapa" value="identificar">
+        <div class="mb-3">
+            <label for="username" class="form-label">Nome de usuário</label>
+            <input type="text" name="username" id="username" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">E-mail</label>
+            <input type="email" name="email" id="email" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-warning">Continuar</button>
+    </form>
+    {% endif %}
+</section>
+{% include "footer.html" %}
+{% endblock %}

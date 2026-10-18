@@ -10,10 +10,6 @@ def index(request):
     return render(request, "barbearia_seu_inacio/index.html")
 
 
-def base(request):
-    return render(request, "templates/base.html")
-
-
 def servicos(request):
     return render(request, "barbearia_seu_inacio/servicos.html")
 
@@ -23,19 +19,12 @@ def contato(request):
 
 
 def galeria(request):
-    postagens = Postagem.objects.all()
-    paginator = Paginator(postagens, 3)  # Separa em páginas de 3 postagens
-    numero_da_pagina = request.GET.get('pagina')  # Pega o número da página da URL
-    print(numero_da_pagina)
-    numero_da_pagina = numero_da_pagina if numero_da_pagina else 1
-    postagens_paginadas = paginator.get_page(numero_da_pagina)
-    range_elided = paginator.get_elided_page_range(numero_da_pagina, on_each_side=1, on_ends=1)
-
-    
+    postagens = Postagem.objects.order_by("-id")
+    paginator = Paginator(postagens, 3)
+    pagina = paginator.get_page(request.GET.get("pagina"))
     return render(request, "barbearia_seu_inacio/galeria.html", context={
-        "postagens": postagens,
-        "postagens": postagens_paginadas,
-        "range_elided": range_elided,
+        "postagens": pagina,
+        "range_elided": paginator.get_elided_page_range(pagina.number, on_each_side=1, on_ends=1),
     })
 
 

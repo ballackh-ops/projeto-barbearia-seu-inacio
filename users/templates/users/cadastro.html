@@ -7,7 +7,7 @@
     <h2>Criar Conta</h2>
     <form method="POST">
         {% csrf_token %}
-        {% crispy form %}
+        {{ form|crispy }}
     </form>
     <a href="{% url 'index' %}" class="btn btn-outline-warning">Enviar</a>
     <a href="{% url 'index' %}" class="btn btn-outline-danger">Cancelar</a>

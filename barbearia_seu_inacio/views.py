@@ -1,8 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import Postagem
-from .forms import PostagemForm
+from .models import Postagem, Servico
+from .forms import PostagemForm, ServicoForm
 from django.core.paginator import Paginator
 
 
@@ -11,8 +11,79 @@ def index(request):
 
 
 def servicos(request):
-    return render(request, "barbearia_seu_inacio/servicos.html")
+    servicos = Postagem.objects.order_by("-id")
+    paginator = Paginator(servicos, 3)
+    pagina = paginator.get_page(request.GET.get("pagina"))
+    return render(request, "barbearia_seu_inacio/servicos.html", context={
+        "servicos": pagina,
+        "range_elided": paginator.get_elided_page_range(pagina.number, on_each_side=1, on_ends=1),
+    })
 
+def servico(request, id_servico):
+    if not request.user.has_perm("barbearia_seu_inacio.view_servico"):
+        messages.error(request, "Você não tem permissão para visualizar este serviço.")
+        return redirect("servicos")
+
+    servico = get_object_or_404(Servico, id=id_servico)
+    return render(request, "barbearia_seu_inacio/servico.html", context={
+        "servico": servico,
+    })
+
+@login_required
+def novo_servico(request):
+    if not request.user.has_perm("barbearia_seu_inacio.add_servico"):
+        messages.error(request, "Acesso negado: Você não tem permissão para criar serviços.")
+        return redirect("servicos")
+
+    if request.method == "POST":
+        form = ServicoForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Serviço cadastrado com sucesso!")
+            return redirect("servicos")
+    else:
+        form = ServicoForm()
+
+    return render(request, "barbearia_seu_inacio/form_servico.html", context={
+        "form": form,
+    })
+
+@login_required
+def editar_servico(request, id_servico):
+    if not request.user.has_perm("barbearia_seu_inacio.change_servico"):
+        messages.error(request, "Acesso negado: Você não tem permissão para editar serviços.")
+        return redirect("servicos")
+
+    servico = get_object_or_404(Servico, id=id_servico)
+    if request.method == "POST":
+        form = ServicoForm(request.POST, request.FILES, instance=servico)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Serviço atualizado com sucesso!")
+            return redirect("servicos")
+    else:
+        form = PostagemForm(instance=servico)
+
+    return render(request, "barbearia_seu_inacio/form_servico.html", context={
+        "form": form,
+        "is_editar": True,
+    })
+
+@login_required
+def remover_servico(request, id_servico):
+    if not request.user.has_perm("barbearia_seu_inacio.delete_servico"):
+        messages.error(request, "Acesso negado: Você não tem permissão para excluir serviços.")
+        return redirect("servicos")
+
+    servico = get_object_or_404(Postagem, id=id_servico)
+    if request.method == "POST":
+        servico.delete()
+        messages.success(request, "Serviço removido com sucesso!")
+        return redirect("servicos")
+
+    return render(request, "barbearia_seu_inacio/confirmar_remocao_servico.html", context={
+        "servico": servico,
+    })
 
 def contato(request):
     return render(request, "barbearia_seu_inacio/contato.html")
@@ -94,7 +165,7 @@ def remover_postagem(request, id_postagem):
         messages.success(request, "Postagem removida com sucesso!")
         return redirect("galeria")
 
-    return render(request, "barbearia_seu_inacio/confirmar_remocao.html", context={
+    return render(request, "barbearia_seu_inacio/confirmar_remocao_postagem.html", context={
         "postagem": postagem,
     })
 

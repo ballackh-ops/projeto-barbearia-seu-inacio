@@ -5,3 +5,9 @@ class Postagem(models.Model):
     imagem = models.ImageField(upload_to="galeria/")
     descricao = HTMLField()
     data = models.DateField(auto_now=True)
+
+class Servico(models.Model):
+    imagem = models.ImageField(upload_to="servico/")
+    descricao = HTMLField()
+    preco = models.FloatField()
+    tempo_de_servico = models.DateTimeField()

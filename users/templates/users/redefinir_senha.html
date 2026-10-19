@@ -2,7 +2,6 @@
 {% load crispy_forms_tags %}
 {% block title %}{{ block.super }} - Recuperar Senha{% endblock %}
 {% block content %}
-{% include "nav.html" %}
 <section class="py-5 container">
     <h2>{% if etapa == "senha" %}Defina sua nova senha{% else %}Esqueceu sua senha?{% endif %}</h2>
     {% if erro %}<div class="alert alert-danger">{{ erro }}</div>{% endif %}
@@ -32,5 +31,4 @@
     </form>
     {% endif %}
 </section>
-{% include "footer.html" %}
 {% endblock %}

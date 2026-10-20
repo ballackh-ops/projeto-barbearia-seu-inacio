@@ -11,7 +11,7 @@ def index(request):
 
 
 def servicos(request):
-    servicos = Postagem.objects.order_by("-id")
+    servicos = Servico.objects.order_by("-id")
     paginator = Paginator(servicos, 3)
     pagina = paginator.get_page(request.GET.get("pagina"))
     return render(request, "barbearia_seu_inacio/servicos.html", context={
@@ -62,7 +62,7 @@ def editar_servico(request, id_servico):
             messages.success(request, "Serviço atualizado com sucesso!")
             return redirect("servicos")
     else:
-        form = PostagemForm(instance=servico)
+        form = ServicoForm(instance=servico)
 
     return render(request, "barbearia_seu_inacio/form_servico.html", context={
         "form": form,
@@ -75,7 +75,7 @@ def remover_servico(request, id_servico):
         messages.error(request, "Acesso negado: Você não tem permissão para excluir serviços.")
         return redirect("servicos")
 
-    servico = get_object_or_404(Postagem, id=id_servico)
+    servico = get_object_or_404(Servico, id=id_servico)
     if request.method == "POST":
         servico.delete()
         messages.success(request, "Serviço removido com sucesso!")

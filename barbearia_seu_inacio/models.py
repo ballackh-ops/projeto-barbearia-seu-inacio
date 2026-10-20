@@ -7,6 +7,7 @@ class Postagem(models.Model):
     data = models.DateField(auto_now=True)
 
 class Servico(models.Model):
+    nome=models.CharField(max_length=100)
     imagem = models.ImageField(upload_to="servico/")
     descricao = HTMLField()
     preco = models.FloatField()

@@ -7,8 +7,8 @@ class Postagem(models.Model):
     data = models.DateField(auto_now=True)
 
 class Servico(models.Model):
-    nome=models.CharField(max_length=100)
+    nome = models.CharField(max_length=100)
     imagem = models.ImageField(upload_to="servico/")
     descricao = HTMLField()
-    preco = models.FloatField()
-    tempo_de_servico = models.DateTimeField()
+    preco = models.DecimalField(max_digits=8, decimal_places=2)
+    duracao_minutos = models.PositiveIntegerField(help_text="Duração em minutos")

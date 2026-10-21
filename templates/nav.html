@@ -21,8 +21,8 @@
                 </li>
                 <li class="nav-item">
                     <a href="{% url 'servicos' %}"
-                       class="nav-link col {% if current == 'servicos' %}text-warning{% else %}text-white{% endif %}"
-                       {% if current == 'servicos' %}aria-current="page"{% endif %}>Serviços</a>
+   class="nav-link col {% if current == 'servicos' or current == 'servico' or current == 'novo_servico' or current == 'editar_servico' or current == 'remover_servico' %}text-warning{% else %}text-white{% endif %}"
+   {% if current == 'servicos' or current == 'servico' or current == 'novo_servico' or current == 'editar_servico' or current == 'remover_servico' %}aria-current="page"{% endif %}>Serviços</a>
                 </li>
                 <li class="nav-item">
                     <a href="{% url 'atendimentos' %}"

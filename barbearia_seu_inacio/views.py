@@ -12,13 +12,14 @@ def index(request):
 
 def servicos(request):
     servicos = Servico.objects.order_by("-id")
-    paginator = Paginator(servicos, 3)
+    paginator = Paginator(servicos, 8)
     pagina = paginator.get_page(request.GET.get("pagina"))
     return render(request, "barbearia_seu_inacio/servicos.html", context={
         "servicos": pagina,
         "range_elided": paginator.get_elided_page_range(pagina.number, on_each_side=1, on_ends=1),
     })
 
+@login_required
 def servico(request, id_servico):
     if not request.user.has_perm("barbearia_seu_inacio.view_servico"):
         messages.error(request, "Você não tem permissão para visualizar este serviço.")

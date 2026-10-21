@@ -8,4 +8,4 @@ class PostagemAdmin(admin.ModelAdmin):
 
 @admin.register(Servico)
 class ServicoAdmin(admin.ModelAdmin):
-    list_display = ("id", "descricao", "tempo_de_servico", "imagem", "preco")
+    list_display = ("id", "descricao", "nome", "duracao_minutos", "imagem", "preco")

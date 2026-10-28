@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}{% if is_editar %}Editar Produto{% else %}Novo Produto{% endif %} - {{ block.super }}{% endblock %}
+
+{% block content %}
+{% include "nav.html" %}
+
+<section class="py-5 container">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+      <div class="card shadow-sm border-0">
+        <div class="card-header bg-dark text-white py-3 text-center">
+          <h4 class="mb-0">{% if is_editar %}✏️ Editar Produto{% else %}➕ Novo Produto{% endif %}</h4>
+        </div>
+
+        <div class="card-body p-4">
+          <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            {% if is_editar and form.instance.imagem %}
+              <div class="mb-3 text-center">
+                <label class="form-label d-block text-muted fw-bold">Imagem Atual:</label>
+                <img src="{{ form.instance.imagem.url }}" class="img-thumbnail" style="max-height: 180px;">
+              </div>
+            {% endif %}
+
+            {{ form|crispy }}
+
+            <div class="d-flex justify-content-between align-items-center mt-4 pt-3 border-top">
+              <a href="{% url 'loja' %}" class="btn btn-outline-secondary px-4">Cancelar</a>
+              <button type="submit" class="btn btn-primary px-4">
+                {% if is_editar %}Salvar Alterações{% else %}Cadastrar Produto{% endif %}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{{ form.media }}
+{% include "footer.html" %}
+{% endblock %}

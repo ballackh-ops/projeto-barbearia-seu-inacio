@@ -1,9 +1,10 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import Postagem, Servico
-from .forms import PostagemForm, ServicoForm
+from .models import Postagem, Servico, Produto
+from .forms import PostagemForm, ServicoForm, ProdutoForm
 from django.core.paginator import Paginator
+
 
 
 def index(request):
@@ -185,3 +186,68 @@ def atendimentos(request):
 
 def loja(request):
     return render(request, "barbearia_seu_inacio/loja.html")
+
+def loja(request):
+    produtos = Produto.objects.all()
+    return render(request, "barbearia_seu_inacio/loja.html", context={
+        "produtos": produtos,
+    })
+
+
+@login_required
+def novo_produto(request):
+    if not request.user.has_perm("barbearia_seu_inacio.add_produto"):
+        messages.error(request, "Acesso negado: Você não tem permissão para cadastrar produtos.")
+        return redirect("loja")
+
+    if request.method == "POST":
+        form = ProdutoForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Produto cadastrado com sucesso!")
+            return redirect("loja")
+    else:
+        form = ProdutoForm()
+
+    return render(request, "barbearia_seu_inacio/form_produto.html", context={
+        "form": form,
+    })
+
+
+@login_required
+def editar_produto(request, id_produto):
+    if not request.user.has_perm("barbearia_seu_inacio.change_produto"):
+        messages.error(request, "Acesso negado: Você não tem permissão para editar produtos.")
+        return redirect("loja")
+
+    produto = get_object_or_404(Produto, id=id_produto)
+    if request.method == "POST":
+        form = ProdutoForm(request.POST, request.FILES, instance=produto)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Produto atualizado com sucesso!")
+            return redirect("loja")
+    else:
+        form = ProdutoForm(instance=produto)
+
+    return render(request, "barbearia_seu_inacio/form_produto.html", context={
+        "form": form,
+        "is_editar": True,
+    })
+
+
+@login_required
+def remover_produto(request, id_produto):
+    if not request.user.has_perm("barbearia_seu_inacio.delete_produto"):
+        messages.error(request, "Acesso negado: Você não tem permissão para excluir produtos.")
+        return redirect("loja")
+
+    produto = get_object_or_404(Produto, id=id_produto)
+    if request.method == "POST":
+        produto.delete()
+        messages.success(request, "Produto removido com sucesso!")
+        return redirect("loja")
+
+    return render(request, "barbearia_seu_inacio/confirmar_remocao_produto.html", context={
+        "produto": produto,
+    })

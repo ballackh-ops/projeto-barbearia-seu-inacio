@@ -18,4 +18,8 @@ urlpatterns = [
     path("sobre/", views.sobre, name="sobre"),
     path("atendimentos/", views.atendimentos, name="atendimentos"),
     path("loja/", views.loja, name="loja"),
+    path("loja/", views.loja, name="loja"),
+    path("loja/novo/", views.novo_produto, name="novo_produto"),
+    path("loja/<int:id_produto>/editar/", views.editar_produto, name="editar_produto"),
+    path("loja/<int:id_produto>/remover/", views.remover_produto, name="remover_produto"),
 ]

@@ -2,7 +2,6 @@
 {% block title %}Loja - {{ block.super }}{% endblock %}
 
 {% block content %}
-{% include "nav.html" %}
 
 <section class="py-5 container">
   {% if messages %}
@@ -18,7 +17,7 @@
   <div class="d-flex justify-content-between align-items-center mb-4">
     <h2>Nossos Produtos</h2>
     {% if perms.barbearia_seu_inacio.add_produto %}
-      <a href="{% url 'novo_produto' %}" class="btn btn-success">+ Novo Produto</a>
+      <a href="{% url 'novo_produto' %}" class="btn btn-warning">Novo produto</a>
     {% endif %}
   </div>
 
@@ -63,5 +62,4 @@
   </div>
 </section>
 
-{% include "footer.html" %}
 {% endblock %}

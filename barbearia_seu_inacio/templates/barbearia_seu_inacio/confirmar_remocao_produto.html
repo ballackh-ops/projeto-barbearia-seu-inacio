@@ -2,7 +2,6 @@
 {% block title %}Excluir Produto - {{ block.super }}{% endblock %}
 
 {% block content %}
-{% include "nav.html" %}
 
 <section class="py-5 container">
   <div class="row justify-content-center">
@@ -13,11 +12,11 @@
         </div>
 
         <div class="card-body p-4 text-center">
-          <p class="fs-5">Tem certeza que deseja excluir o produto <strong>"{{ produto.nome }}"</strong>?</p>
+          <p class="fs-5">Tem certeza que deseja excluir este produto?</p>
 
           <form method="POST" class="d-flex justify-content-center gap-3 mt-4">
             {% csrf_token %}
-            <a href="{% url 'loja' %}" class="btn btn-secondary px-4">Cancelar</a>
+            <a href="{% url 'loja' %}" class="btn btn-outline-secondary px-4">Cancelar</a>
             <button type="submit" class="btn btn-danger px-4">Confirmar Exclusão</button>
           </form>
         </div>
@@ -26,5 +25,4 @@
   </div>
 </section>
 
-{% include "footer.html" %}
 {% endblock %}

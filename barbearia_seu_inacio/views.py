@@ -4,6 +4,9 @@ from django.contrib.auth.decorators import login_required
 from .models import Postagem, Servico, Produto
 from .forms import PostagemForm, ServicoForm, ProdutoForm
 from django.core.paginator import Paginator
+from django.utils import timezone
+from .models import Aviso
+from .forms import AvisoForm
 
 
 
@@ -250,4 +253,77 @@ def remover_produto(request, id_produto):
 
     return render(request, "barbearia_seu_inacio/confirmar_remocao_produto.html", context={
         "produto": produto,
+    })
+
+def mural(request):
+    hoje = timezone.localdate()
+
+    # Administradores/usuários com permissão veem todos; visitantes veem apenas os válidos
+    if request.user.has_perm("barbearia_seu_inacio.change_aviso") or request.user.has_perm("barbearia_seu_inacio.delete_aviso"):
+        avisos = Aviso.objects.all().order_by("data")
+    else:
+        avisos = Aviso.objects.filter(data__gte=hoje).order_by("data")
+
+    return render(request, "barbearia_seu_inacio/mural.html", context={
+        "avisos": avisos,
+        "hoje": hoje,
+    })
+
+
+@login_required
+def novo_aviso(request):
+    if not request.user.has_perm("barbearia_seu_inacio.add_aviso"):
+        messages.error(request, "Acesso negado: Você não tem permissão para criar avisos.")
+        return redirect("mural")
+
+    if request.method == "POST":
+        form = AvisoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Aviso publicado com sucesso!")
+            return redirect("mural")
+    else:
+        form = AvisoForm()
+
+    return render(request, "barbearia_seu_inacio/form_aviso.html", context={
+        "form": form,
+    })
+
+
+@login_required
+def editar_aviso(request, id_aviso):
+    if not request.user.has_perm("barbearia_seu_inacio.change_aviso"):
+        messages.error(request, "Acesso negado: Você não tem permissão para editar avisos.")
+        return redirect("mural")
+
+    aviso = get_object_or_404(Aviso, id=id_aviso)
+    if request.method == "POST":
+        form = AvisoForm(request.POST, instance=aviso)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Aviso atualizado com sucesso!")
+            return redirect("mural")
+    else:
+        form = AvisoForm(instance=aviso)
+
+    return render(request, "barbearia_seu_inacio/form_aviso.html", context={
+        "form": form,
+        "is_editar": True,
+    })
+
+
+@login_required
+def remover_aviso(request, id_aviso):
+    if not request.user.has_perm("barbearia_seu_inacio.delete_aviso"):
+        messages.error(request, "Acesso negado: Você não tem permissão para excluir avisos.")
+        return redirect("mural")
+
+    aviso = get_object_or_404(Aviso, id=id_aviso)
+    if request.method == "POST":
+        aviso.delete()
+        messages.success(request, "Aviso removido com sucesso!")
+        return redirect("mural")
+
+    return render(request, "barbearia_seu_inacio/confirmar_remocao_aviso.html", context={
+        "aviso": aviso,
     })

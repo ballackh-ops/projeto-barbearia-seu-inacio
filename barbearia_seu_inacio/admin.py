@@ -3,6 +3,7 @@ from django.contrib import admin
 from .models import Postagem, Servico
 from django.contrib import admin
 from .models import Produto
+from .models import Aviso
 
 @admin.register(Postagem)
 class PostagemAdmin(admin.ModelAdmin):
@@ -17,3 +18,9 @@ class ProdutoAdmin(admin.ModelAdmin):
     list_display = ("id", "nome", "preco", "estoque", "data_criacao")
     search_fields = ("nome",)
     list_filter = ("data_criacao",)
+
+@admin.register(Aviso)
+class AvisoAdmin(admin.ModelAdmin):
+    list_display = ("id", "nome", "data")
+    search_fields = ("nome", "descricao")
+    list_filter = ("data",)

@@ -1,5 +1,6 @@
 from django.db import models
 from tinymce.models import HTMLField
+from django.db import models
 
 class Postagem(models.Model):
     imagem = models.ImageField(upload_to="galeria/")
@@ -20,6 +21,14 @@ class Produto(models.Model):
     estoque = models.PositiveIntegerField(default=0)
     imagem = models.ImageField(upload_to="produtos/", blank=True, null=True)
     data_criacao = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.nome
+
+class Aviso(models.Model):
+    nome = models.CharField(max_length=100, verbose_name="Título do Aviso")
+    descricao = models.TextField(verbose_name="Descrição")
+    data = models.DateField(verbose_name="Data de Expiração")
 
     def __str__(self):
         return self.nome

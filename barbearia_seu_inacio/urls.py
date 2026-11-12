@@ -22,4 +22,8 @@ urlpatterns = [
     path("loja/novo/", views.novo_produto, name="novo_produto"),
     path("loja/<int:id_produto>/editar/", views.editar_produto, name="editar_produto"),
     path("loja/<int:id_produto>/remover/", views.remover_produto, name="remover_produto"),
+    path("mural/", views.mural, name="mural"),
+    path("mural/novo/", views.novo_aviso, name="novo_aviso"),
+    path("mural/<int:id_aviso>/editar/", views.editar_aviso, name="editar_aviso"),
+    path("mural/<int:id_aviso>/remover/", views.remover_aviso, name="remover_aviso"),
 ]

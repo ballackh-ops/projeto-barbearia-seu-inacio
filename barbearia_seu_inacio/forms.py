@@ -1,8 +1,5 @@
-from .models import Postagem, Servico
+from .models import Postagem, Servico, Produto, Aviso
 from django import forms
-from django import forms
-from .models import Produto
-from .models import Aviso
 
 class PostagemForm(forms.ModelForm):
 

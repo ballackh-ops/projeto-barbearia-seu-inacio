@@ -1,12 +1,10 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import Postagem, Servico, Produto
-from .forms import PostagemForm, ServicoForm, ProdutoForm
 from django.core.paginator import Paginator
 from django.utils import timezone
-from .models import Aviso
-from .forms import AvisoForm
+from .models import Postagem, Servico, Produto, Aviso
+from .forms import PostagemForm, ServicoForm, ProdutoForm, AvisoForm
 
 
 
@@ -186,9 +184,6 @@ def sobre(request):
 def atendimentos(request):
     return render(request, "barbearia_seu_inacio/atendimentos.html")
 
-
-def loja(request):
-    return render(request, "barbearia_seu_inacio/loja.html")
 
 def loja(request):
     produtos = Produto.objects.all()

@@ -2,17 +2,6 @@
 {% block title %}Mural de Avisos - {{ block.super }}{% endblock %}
 
 {% block content %}
-{% include "nav.html" %}
-
-<section class="py-5 container">
-  {% if messages %}
-    {% for message in messages %}
-      <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-        {{ message }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
-    {% endfor %}
-  {% endif %}
 
   <div class="d-flex justify-content-between align-items-center mb-4">
     <h2>Mural de Avisos</h2>
@@ -61,5 +50,4 @@
   </div>
 </section>
 
-{% include "footer.html" %}
 {% endblock %}

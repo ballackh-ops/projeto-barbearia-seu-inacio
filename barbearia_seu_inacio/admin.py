@@ -1,9 +1,5 @@
-# barbearia_seu_inacio/admin.py
 from django.contrib import admin
-from .models import Postagem, Servico
-from django.contrib import admin
-from .models import Produto
-from .models import Aviso
+from .models import Postagem, Servico, Produto, Aviso
 
 @admin.register(Postagem)
 class PostagemAdmin(admin.ModelAdmin):

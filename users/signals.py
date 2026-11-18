@@ -34,15 +34,15 @@ def criar_grupos_e_barbeiro(sender, **kwargs):
 
     permissoes = Permission.objects.filter(
         content_type__app_label="barbearia_seu_inacio",
-        codename__in=["view_postagem", "add_postagem", "change_postagem", "delete_postagem"
-                    "view_produto", "add_produto", "change_produto", "delete_produto"
+        codename__in=["view_postagem", "add_postagem", "change_postagem", "delete_postagem",
+                    "view_produto", "add_produto", "change_produto", "delete_produto",
                     "view_servico", "add_servico", "change_servico", "delete_servico",
                     "view_aviso", "add_aviso", "change_aviso", "delete_aviso",
                       ],
     )
 
     cliente, _ = Group.objects.get_or_create(name=NOME_GRUPO_CLIENTE)
-    cliente.permissions.add(*permissoes.filter(codename=["view_postagem", "view_servico", "view_aviso"]))
+    cliente.permissions.add(*permissoes.filter(codename=["view_postagem", "view_produto","view_servico", "view_aviso"]))
 
     administradores, _ = Group.objects.get_or_create(name=NOME_GRUPO_ADMIN)
     administradores.permissions.add(*permissoes)

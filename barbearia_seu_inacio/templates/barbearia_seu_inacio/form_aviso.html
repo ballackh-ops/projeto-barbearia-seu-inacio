@@ -9,7 +9,7 @@
   <div class="row justify-content-center">
     <div class="col-md-8 col-lg-6">
       <div class="card shadow-sm border-0">
-        <div class="card-header bg-dark text-white py-3 text-center">
+        <div class="card-header text-white py-3 text-center" id="postagem_form_card">
           <h4 class="mb-0">{% if is_editar %} Editar Aviso {% else %} Novo Aviso {% endif %}</h4>
         </div>
 
@@ -20,7 +20,7 @@
 
             <div class="d-flex justify-content-between align-items-center mt-4 pt-3 border-top">
               <a href="{% url 'mural' %}" class="btn btn-outline-secondary px-4">Cancelar</a>
-              <button type="submit" class="btn btn-primary px-4">
+              <button type="submit" class="btn btn-warning px-4">
                 {% if is_editar %}Salvar Alterações{% else %}Publicar Aviso{% endif %}
               </button>
             </div>

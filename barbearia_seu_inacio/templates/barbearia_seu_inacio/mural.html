@@ -14,7 +14,7 @@
 
   <div class="row">
     {% for aviso in avisos %}
-      <div class="col-md-6 col-lg-4 mb-4">
+      <div class="col-md-6 col-lg-6 mb-4">
         <div class="card h-100 shadow-sm {% if aviso.data < hoje %}border-danger opacity-75{% endif %}">
           <div class="card-header text-white d-flex justify-content-between align-items-center" id="postagem_form_card">
             <h5 class="card-title mb-0">{{ aviso.nome }}</h5>
